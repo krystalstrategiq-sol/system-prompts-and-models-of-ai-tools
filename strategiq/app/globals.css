@@ -1,0 +1,262 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base ─────────────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: #07070F;
+  color: #ffffff;
+  font-family: var(--font-inter), Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Focus ─────────────────────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid #000FFF;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ─── Skip to content ───────────────────────────────────── */
+
+.skip-nav {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-nav:focus {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  width: auto;
+  height: auto;
+  padding: 0.75rem 1.5rem;
+  background: #000FFF;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  z-index: 9999;
+  text-decoration: none;
+  border-radius: 2px;
+}
+
+/* ─── Hero noise layer (PRESSURE phase) ────────────────── */
+
+.hero-noise::before {
+  content: 'funding strategy content decisions research data growth analytics seo operations marketing cash flow brand systems hiring competition pivot direction pricing positioning clarity action information answers advice frameworks pivot signalling';
+  position: absolute;
+  inset: 0;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  word-spacing: 0.5em;
+  line-height: 2.6;
+  color: #ffffff;
+  opacity: 0.035;
+  overflow: hidden;
+  pointer-events: none;
+  padding: 2rem;
+  z-index: 1;
+}
+
+/* ─── Hero signal sweep (EDIT phase) ───────────────────── */
+
+@keyframes signal-sweep {
+  0%   { transform: translateX(-110%); opacity: 0; }
+  6%   { opacity: 1; }
+  94%  { opacity: 1; }
+  100% { transform: translateX(210%); opacity: 0; }
+}
+
+.hero-signal {
+  position: absolute;
+  left: 0;
+  top: 40%;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    #000FFF 18%,
+    #000FFF 82%,
+    transparent 100%
+  );
+  z-index: 2;
+  transform: translateX(-110%);
+  animation: signal-sweep 1.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+  pointer-events: none;
+}
+
+/* ─── Hero content emerge (DIRECTION phase) ────────────── */
+
+@keyframes emerge {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.emerge {
+  opacity: 0;
+  animation: emerge 0.65s ease-out forwards;
+}
+
+.emerge-1 { animation-delay: 0.30s; }
+.emerge-2 { animation-delay: 0.50s; }
+.emerge-3 { animation-delay: 0.70s; }
+.emerge-4 { animation-delay: 0.90s; }
+.emerge-5 { animation-delay: 1.10s; }
+
+/* ─── Section entrance ──────────────────────────────────── */
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.section-reveal {
+  opacity: 0;
+  transition: opacity 0.1s;
+}
+
+.section-reveal.in-view {
+  animation: fade-up 0.65s ease-out forwards;
+}
+
+/* ─── Reduced motion ────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .emerge      { opacity: 1; animation: none; }
+  .hero-signal { display: none; }
+  .section-reveal { opacity: 1; animation: none; }
+}
+
+/* ─── Horizontal rule dividers ─────────────────────────── */
+
+.rule { border-color: rgba(255, 255, 255, 0.08); }
+
+/* ─── Blue accent underline ────────────────────────────── */
+
+.signal-underline {
+  position: relative;
+  display: inline-block;
+}
+.signal-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 2px;
+  background: #000FFF;
+}
+
+/* ─── Document grid lines (sections) ───────────────────── */
+
+.doc-lines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 31px,
+    rgba(255, 255, 255, 0.015) 31px,
+    rgba(255, 255, 255, 0.015) 32px
+  );
+}
+
+/* ─── CTA button states ─────────────────────────────────── */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #000FFF;
+  color: #ffffff;
+  padding: 1rem 2rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.15s ease, transform 0.1s ease;
+  min-height: 52px;
+}
+.btn-primary:hover { background: #1a2eff; }
+.btn-primary:active { transform: translateY(1px); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: #ffffff;
+  padding: 1rem 2rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: border-color 0.15s ease;
+  min-height: 52px;
+}
+.btn-secondary:hover { border-color: rgba(255, 255, 255, 0.6); }
+
+/* ─── Form base ─────────────────────────────────────────── */
+
+.field {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  padding: 0.875rem 1rem;
+  font-size: 0.9375rem;
+  font-family: var(--font-inter), Inter, sans-serif;
+  transition: border-color 0.15s ease;
+  border-radius: 0;
+}
+.field::placeholder { color: rgba(255, 255, 255, 0.35); }
+.field:focus {
+  outline: none;
+  border-color: #000FFF;
+}
+
+textarea.field { resize: vertical; min-height: 100px; }
+
+.field-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 0.5rem;
+}
+
+/* ─── Method step ───────────────────────────────────────── */
+
+.method-step::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: #000FFF;
+  margin-bottom: 1.25rem;
+}
